@@ -1,0 +1,113 @@
+import java. util.Random;
+public class Rand_10{
+    public static void main (String args[]){
+	Random rand = new Random();
+	int[] r = new int[10];
+	for(int i=0;i<10;i++)r[i]=0;
+	int num = 0;
+
+	for(int i=0;i<10000;i++){
+	    num = rand.nextInt(10);
+	    r[num]++;
+	}
+	for(int i=0;i<10;i++)
+	    System.out.println(i+":"+r[i]);
+    }
+}
+/*
+実行結果
+0:987
+1:1037
+2:1051
+3:986
+4:932
+5:976
+6:980
+7:1019
+8:1046
+9:986
+*/
+
+/*
+おおよそ均等にそれぞれの数字が出ているのが確認できる。
+*/
+
+import java.util.Random;
+public class Rand_100{
+    public static void main(String args[]){
+	int[] a=new int[101];
+	for(int i=0;i<a.length;i++)a[i]=-1;
+	int n=a.length-1;
+	int max=150;
+	u_rand(a,n,max);
+
+	
+    }
+    public static void u_rand(int[] a,int n,int max){
+	int j=0;
+	Random rand = new Random(max);
+	int num=0;
+	while(j<n){
+	    num=rand.nextInt(max);
+	    if(seqSearch(a,n,num)==-1){
+		    a[j]=num;
+		    j++;
+	    }
+	    // else System.out.println("exist "+num);
+	}
+	a=bubbleSort(a);
+	for(int i=0;i<n;i++){
+	    System.out.println(a[i]);
+	}
+	       
+	
+    }
+
+    public static int[] bubbleSort(int[] a){
+	int tmp=0;
+	for(int i=0;i<a.length;i++){
+	    for(int j=a.length-1;j>i;j--){
+		if(a[j-1]>a[j]){
+		    tmp=a[j];
+		    a[j]=a[j-1];
+		    a[j-1]=tmp;
+		}
+	    }
+	}
+	return a;
+    }
+
+
+    public static int seqSearch(int[] a,int n,int key){
+	int i=0;
+	a[n]=key;
+	while(true){
+	    if(a[i]==key)
+		break;
+	    i++;
+	}
+	return i==n ? -1 : i;
+    }
+}
+
+
+
+/*
+実行結果
+   0   1   2   4   5   6   7  11  13  14  15  17  18  21  23  24  25  26  27  28
+  29  30  32  33  35  36  37  38  39  40  42  43  46  48  50  52  53  57  58  59
+  60  63  64  64  66  67  68  73  74  75  78  80  81  83  84  85  87  89  90  91
+  92  93  95  96  97  98 101 102 104 105 109 110 111 112 114 115 116 117 118 120
+ 121 122 123 124 125 126 127 128 129 131 132 133 134 136 138 141 143 144 146 147
+*/
+
+
+/*
+線形探索を利用することで重複のない乱数を発生させることができた。
+*/
+
+
+
+
+
+
